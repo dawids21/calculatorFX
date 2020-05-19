@@ -61,10 +61,10 @@ public class Calculator extends GridPane {
         buttons[24] = new Button("=");
         buttons[25] = new Button("AC");
         var font = Font.font("Noto Sans", 15);
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].setPrefHeight(25);
-            buttons[i].setPrefWidth(50);
-            buttons[i].setFont(font);
+        for (Button button : buttons) {
+            button.setPrefHeight(25);
+            button.setPrefWidth(50);
+            button.setFont(font);
         }
     }
 }
