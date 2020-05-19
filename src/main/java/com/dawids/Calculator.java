@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class Calculator extends GridPane {
     private final TextField fieldMemory = new TextField();
@@ -59,5 +60,11 @@ public class Calculator extends GridPane {
         buttons[23] = new Button("C");
         buttons[24] = new Button("=");
         buttons[25] = new Button("AC");
+        var font = Font.font("Noto Sans", 15);
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].setPrefHeight(25);
+            buttons[i].setPrefWidth(50);
+            buttons[i].setFont(font);
+        }
     }
 }
