@@ -1,5 +1,7 @@
 package com.dawids;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -13,6 +15,10 @@ public class Calculator extends GridPane {
 
     public Calculator() {
         super();
+        setAlignment(Pos.CENTER);
+        setPadding(new Insets(10));
+        setHgap(5);
+        setVgap(5);
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
         add(fieldOperation, 0, 1);
