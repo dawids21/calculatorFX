@@ -1,5 +1,7 @@
 package com.dawids;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,6 +15,8 @@ public class Calculator extends GridPane {
     private final TextField fieldOperation = new TextField();
     private final TextField fieldActual = new TextField();
     private final Button[] buttons = new Button[26];
+    private final Font font = Font.font("Noto Sans");
+    private final SimpleDoubleProperty fontSize = new SimpleDoubleProperty(15);
 
     public Calculator() {
         super();
@@ -20,6 +24,7 @@ public class Calculator extends GridPane {
         setPadding(new Insets(10));
         setHgap(5);
         setVgap(5);
+        fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
         fieldMemory.setPrefWidth(100);
         fieldResult.setPrefWidth(150);
         fieldOperation.setPrefWidth(50);
@@ -64,10 +69,10 @@ public class Calculator extends GridPane {
         buttons[23] = new Button("C");
         buttons[24] = new Button("=");
         buttons[25] = new Button("AC");
-        var font = Font.font("Noto Sans", 15);
         for (Button button : buttons) {
-            button.setPrefHeight(25);
-            button.setPrefWidth(50);
+            button.prefHeightProperty().bind(heightProperty().divide(8));
+            button.prefWidthProperty().bind(widthProperty().divide(5));
+            button.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
             button.setFont(font);
         }
     }
