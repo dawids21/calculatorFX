@@ -23,6 +23,7 @@ public class Calculator extends GridPane {
                 add(buttons[i * 5 + j], j, i + 3);
             }
         }
+        add(buttons[25], 4, 2);
     }
 
     private void createButtons() {
@@ -51,5 +52,6 @@ public class Calculator extends GridPane {
         buttons[22] = new Button(".");
         buttons[23] = new Button("C");
         buttons[24] = new Button("=");
+        buttons[25] = new Button("AC");
     }
 }
