@@ -13,8 +13,8 @@ public class Calculator extends GridPane {
 
     public Calculator() {
         super();
-        add(fieldMemory, 0, 0);
-        add(fieldResult, 1, 0);
+        add(fieldMemory, 0, 0, 2, 1);
+        add(fieldResult, 2, 0, 3, 1);
         add(fieldOperation, 0, 1);
         add(fieldActual, 1, 1, 4, 1);
         createButtons();
