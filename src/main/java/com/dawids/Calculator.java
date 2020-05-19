@@ -29,18 +29,22 @@ public class Calculator extends GridPane {
         fieldMemory.prefWidthProperty().bind(widthProperty().divide(5).multiply(2));
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        fieldMemory.setEditable(false);
 
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        fieldResult.setEditable(false);
 
         fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
         fieldOperation.setFont(font);
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        fieldOperation.setEditable(false);
 
         fieldActual.prefWidthProperty().bind(widthProperty().divide(5).multiply(4));
         fieldActual.setFont(font);
         fieldActual.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        fieldActual.setEditable(false);
 
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
