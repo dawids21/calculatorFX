@@ -20,6 +20,10 @@ public class Calculator extends GridPane {
         setPadding(new Insets(10));
         setHgap(5);
         setVgap(5);
+        fieldMemory.setPrefWidth(100);
+        fieldResult.setPrefWidth(150);
+        fieldOperation.setPrefWidth(50);
+        fieldActual.setPrefWidth(200);
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
         add(fieldOperation, 0, 1);
