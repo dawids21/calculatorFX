@@ -25,14 +25,28 @@ public class Calculator extends GridPane {
         setHgap(5);
         setVgap(5);
         fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
-        fieldMemory.setPrefWidth(100);
-        fieldResult.setPrefWidth(150);
-        fieldOperation.setPrefWidth(50);
-        fieldActual.setPrefWidth(200);
+
+        fieldMemory.prefWidthProperty().bind(widthProperty().divide(5).multiply(2));
+        fieldMemory.setFont(font);
+        fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+
+        fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
+        fieldResult.setFont(font);
+        fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+
+        fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
+        fieldOperation.setFont(font);
+        fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+
+        fieldActual.prefWidthProperty().bind(widthProperty().divide(5).multiply(4));
+        fieldActual.setFont(font);
+        fieldActual.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
         add(fieldOperation, 0, 1);
         add(fieldActual, 1, 1, 4, 1);
+
         createButtons();
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 5; j++) {
