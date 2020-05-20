@@ -195,6 +195,11 @@ public class Calculator extends GridPane {
     }
 
     private void addToActual(String text) {
-        fieldActual.setText(fieldActual.getText() + text);
+        var actualText = fieldActual.getText();
+        if (actualText.equals("0")) {
+            fieldActual.setText(text);
+        } else {
+            fieldActual.setText(fieldActual.getText() + text);
+        }
     }
 }
