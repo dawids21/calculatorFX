@@ -102,18 +102,19 @@ public class Calculator extends GridPane {
         buttons[0].setOnAction(event -> valueResult.set(0.0));
 
         buttons[1] = new Button("MR");
-        buttons[1].setOnAction(event -> fieldActual.setText(fieldMemory.getText()));
-
-        buttons[2] = new Button("M+");
-        buttons[2].setOnAction(event -> {
-            valueMemory.set(valueMemory.get() + Double.parseDouble(fieldActual.getText()));
-            System.out.println(valueMemory.get());
-            System.out.println(fieldMemory.getTextFormatter().getValue());
-
+        buttons[1].setOnAction(event -> {
+            if (valueMemory.get() % 1 == 0) {
+                fieldActual.setText(String.valueOf((int) valueMemory.get()));
+            } else {
+                fieldActual.setText(String.valueOf(valueMemory.get()));
+            }
         });
 
+        buttons[2] = new Button("M+");
+        buttons[2].setOnAction(event -> valueMemory.set(valueMemory.get() + Double.parseDouble(fieldActual.getText())));
+
         buttons[3] = new Button("M-");
-        buttons[3].setOnAction(event -> valueMemory.subtract(Double.parseDouble(fieldActual.getText())));
+        buttons[3].setOnAction(event -> valueMemory.set(valueMemory.get() - Double.parseDouble(fieldActual.getText())));
 
         buttons[4] = new Button("%");
         buttons[4].setOnAction(event -> fieldOperation.setText("%"));
