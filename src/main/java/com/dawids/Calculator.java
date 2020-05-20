@@ -173,17 +173,16 @@ public class Calculator extends GridPane {
         buttons[23] = new Button("C");
         buttons[23].setOnAction(event -> {
             fieldActual.setText("0");
-            fieldOperation.setText("0");
+            fieldOperation.setText("");
         });
 
         buttons[24] = new Button("=");
 
         buttons[25] = new Button("AC");
-
         buttons[25].setOnAction(event -> {
             fieldActual.setText("0");
-            fieldOperation.setText("0");
-            fieldResult.setText("0");
+            fieldOperation.setText("");
+            valueResult.set(0.0);
         });
 
         for (Button button : buttons) {
