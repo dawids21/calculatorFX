@@ -12,8 +12,6 @@ import javafx.scene.text.Font;
 import javafx.util.StringConverter;
 
 public class Calculator extends GridPane {
-    private final TextField fieldMemory = new TextField();
-    private final TextField fieldResult = new TextField();
     private final TextField fieldOperation = new TextField();
     private final TextField fieldActual = new TextField();
     private final Button[] buttons = new Button[26];
@@ -30,6 +28,7 @@ public class Calculator extends GridPane {
         setVgap(5);
         fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
 
+        var fieldMemory = new TextField();
         fieldMemory.prefWidthProperty().bind(widthProperty().divide(5).multiply(2));
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
@@ -49,6 +48,7 @@ public class Calculator extends GridPane {
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
+        var fieldResult = new TextField();
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
