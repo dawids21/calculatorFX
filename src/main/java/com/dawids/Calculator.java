@@ -66,7 +66,7 @@ public class Calculator extends GridPane {
                 return Double.parseDouble(string);
             }
         };
-        var formatterResult = new TextFormatter<Number>(converterResult);
+        var formatterResult = new TextFormatter<>(converterResult);
         formatterResult.valueProperty().bind(valueResult);
         fieldResult.setTextFormatter(formatterResult);
 
