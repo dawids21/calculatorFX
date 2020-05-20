@@ -100,6 +100,7 @@ public class Calculator extends GridPane {
 
     private void createButtons() {
         //TODO add backspace
+        //TODO buttons as map
         buttons[0] = new Button("MC");
         buttons[0].setOnAction(event -> valueResult.set(0.0));
 
