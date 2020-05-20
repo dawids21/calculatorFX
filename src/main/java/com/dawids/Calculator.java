@@ -205,21 +205,19 @@ public class Calculator extends GridPane {
             }
         } else if (actualText.equals("0")) {
             fieldActual.setText(text);
+        } else if (actualText.equals("-0")) {
+            fieldActual.setText("-" + text);
         } else {
             fieldActual.setText(actualText + text);
         }
     }
 
     private void negateActual() {
-        double val = Double.parseDouble(fieldActual.getText());
-        if (val != 0.0) {
-            val = -val;
-            if (val % 1 == 0) {
-                fieldActual.setText(String.valueOf((int) val));
-            } else {
-
-                fieldActual.setText(String.valueOf(val));
-            }
+        String actualText = fieldActual.getText();
+        if (actualText.charAt(0) == '-') {
+            fieldActual.setText(actualText.substring(1));
+        } else {
+            fieldActual.setText("-" + actualText);
         }
     }
 }
