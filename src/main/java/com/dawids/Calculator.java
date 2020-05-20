@@ -98,6 +98,7 @@ public class Calculator extends GridPane {
     }
 
     private void createButtons() {
+        //TODO add backspace
         buttons[0] = new Button("MC");
         buttons[0].setOnAction(event -> valueResult.set(0.0));
 
@@ -170,6 +171,7 @@ public class Calculator extends GridPane {
         buttons[21].setOnAction(event -> addToActual("0"));
 
         buttons[22] = new Button(".");
+        buttons[22].setOnAction(event -> addToActual("."));
 
         buttons[23] = new Button("C");
         buttons[23].setOnAction(event -> {
@@ -196,10 +198,14 @@ public class Calculator extends GridPane {
 
     private void addToActual(String text) {
         var actualText = fieldActual.getText();
-        if (actualText.equals("0")) {
+        if (text.equals(".")) {
+            if (!actualText.contains(".")) {
+                fieldActual.setText(actualText + text);
+            }
+        } else if (actualText.equals("0")) {
             fieldActual.setText(text);
         } else {
-            fieldActual.setText(fieldActual.getText() + text);
+            fieldActual.setText(actualText + text);
         }
     }
 }
