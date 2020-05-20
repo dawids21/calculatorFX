@@ -30,6 +30,7 @@ public class Calculator extends GridPane {
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
+        fieldMemory.setText("0");
 
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
@@ -65,12 +66,22 @@ public class Calculator extends GridPane {
 
     private void createButtons() {
         buttons[0] = new Button("MC");
+        buttons[0].setOnAction(event -> fieldMemory.clear());
 
         buttons[1] = new Button("MR");
+        buttons[1].setOnAction(event -> fieldActual.setText(fieldMemory.getText()));
 
         buttons[2] = new Button("M+");
+        buttons[2].setOnAction(event -> {
+            var value = Double.parseDouble(fieldMemory.getText()) + Double.parseDouble(fieldActual.getText());
+            fieldMemory.setText(String.valueOf(value));
+        });
 
         buttons[3] = new Button("M-");
+        buttons[3].setOnAction(event -> {
+            var value = Double.parseDouble(fieldMemory.getText()) - Double.parseDouble(fieldActual.getText());
+            fieldMemory.setText(String.valueOf(value));
+        });
 
         buttons[4] = new Button("%");
         buttons[4].setOnAction(event -> fieldOperation.setText("%"));
