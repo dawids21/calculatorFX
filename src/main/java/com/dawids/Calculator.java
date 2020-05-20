@@ -19,8 +19,8 @@ public class Calculator extends GridPane {
     private final Button[] buttons = new Button[26];
     private final Font font = Font.font("Noto Sans");
     private final SimpleDoubleProperty fontSize = new SimpleDoubleProperty(15);
-    private SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
-    private SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
+    private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
+    private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
 
     public Calculator() {
         super();
@@ -45,7 +45,7 @@ public class Calculator extends GridPane {
                 return Double.parseDouble(string);
             }
         };
-        var formatterMemory = new TextFormatter<Number>(converterMemory);
+        var formatterMemory = new TextFormatter<>(converterMemory);
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
