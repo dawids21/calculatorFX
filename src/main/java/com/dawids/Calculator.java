@@ -39,6 +39,7 @@ public class Calculator extends GridPane {
         fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
         fieldOperation.setFont(font);
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        fieldOperation.setAlignment(Pos.CENTER);
         fieldOperation.setEditable(false);
 
         fieldActual.prefWidthProperty().bind(widthProperty().divide(5).multiply(4));
