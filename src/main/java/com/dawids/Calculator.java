@@ -33,6 +33,7 @@ public class Calculator extends GridPane {
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
+        fieldMemory.setAlignment(Pos.CENTER_RIGHT);
         var converterMemory = new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
@@ -53,7 +54,7 @@ public class Calculator extends GridPane {
         fieldResult.setFont(font);
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldResult.setEditable(false);
-        //fieldResult.setText("0");
+        fieldResult.setAlignment(Pos.CENTER_RIGHT);
         var converterResult = new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
