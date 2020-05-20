@@ -36,6 +36,7 @@ public class Calculator extends GridPane {
         fieldResult.setFont(font);
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldResult.setEditable(false);
+        fieldResult.setText("0");
 
         fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
         fieldOperation.setFont(font);
@@ -48,6 +49,7 @@ public class Calculator extends GridPane {
         fieldActual.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldActual.setAlignment(Pos.CENTER_RIGHT);
         fieldActual.setEditable(false);
+        fieldActual.setText("0");
         //TODO add converter
 
         add(fieldMemory, 0, 0, 2, 1);
@@ -140,8 +142,8 @@ public class Calculator extends GridPane {
 
         buttons[23] = new Button("C");
         buttons[23].setOnAction(event -> {
-            fieldActual.clear();
-            fieldOperation.clear();
+            fieldActual.setText("0");
+            fieldOperation.setText("0");
         });
 
         buttons[24] = new Button("=");
@@ -149,9 +151,9 @@ public class Calculator extends GridPane {
         buttons[25] = new Button("AC");
 
         buttons[25].setOnAction(event -> {
-            fieldActual.clear();
-            fieldOperation.clear();
-            fieldResult.clear();
+            fieldActual.setText("0");
+            fieldOperation.setText("0");
+            fieldResult.setText("0");
         });
 
         for (Button button : buttons) {
