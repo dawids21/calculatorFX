@@ -6,8 +6,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.util.StringConverter;
 
 public class Calculator extends GridPane {
     private final TextField fieldMemory = new TextField();
@@ -17,6 +19,8 @@ public class Calculator extends GridPane {
     private final Button[] buttons = new Button[26];
     private final Font font = Font.font("Noto Sans");
     private final SimpleDoubleProperty fontSize = new SimpleDoubleProperty(15);
+    private SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
+    private SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
 
     public Calculator() {
         super();
@@ -30,7 +34,20 @@ public class Calculator extends GridPane {
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
-        fieldMemory.setText("0");
+        StringConverter<Number> converterMemory = new StringConverter<>() {
+            @Override
+            public String toString(Number object) {
+                return String.valueOf(object);
+                //TODO add conversion
+            }
+
+            public Number fromString(String string) {
+                return Double.parseDouble(string);
+            }
+        };
+        var formatterMemory = new TextFormatter<Number>(converterMemory);
+        formatterMemory.valueProperty().bind(valueMemory);
+        fieldMemory.setTextFormatter(formatterMemory);
 
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
@@ -50,7 +67,6 @@ public class Calculator extends GridPane {
         fieldActual.setAlignment(Pos.CENTER_RIGHT);
         fieldActual.setEditable(false);
         fieldActual.setText("0");
-        //TODO add converter
 
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
@@ -68,22 +84,21 @@ public class Calculator extends GridPane {
 
     private void createButtons() {
         buttons[0] = new Button("MC");
-        buttons[0].setOnAction(event -> fieldMemory.clear());
+        buttons[0].setOnAction(event -> valueResult.set(0.0));
 
         buttons[1] = new Button("MR");
         buttons[1].setOnAction(event -> fieldActual.setText(fieldMemory.getText()));
 
         buttons[2] = new Button("M+");
         buttons[2].setOnAction(event -> {
-            var value = Double.parseDouble(fieldMemory.getText()) + Double.parseDouble(fieldActual.getText());
-            fieldMemory.setText(String.valueOf(value));
+            valueMemory.set(valueMemory.get() + Double.parseDouble(fieldActual.getText()));
+            System.out.println(valueMemory.get());
+            System.out.println(fieldMemory.getTextFormatter().getValue());
+
         });
 
         buttons[3] = new Button("M-");
-        buttons[3].setOnAction(event -> {
-            var value = Double.parseDouble(fieldMemory.getText()) - Double.parseDouble(fieldActual.getText());
-            fieldMemory.setText(String.valueOf(value));
-        });
+        buttons[3].setOnAction(event -> valueMemory.subtract(Double.parseDouble(fieldActual.getText())));
 
         buttons[4] = new Button("%");
         buttons[4].setOnAction(event -> fieldOperation.setText("%"));
