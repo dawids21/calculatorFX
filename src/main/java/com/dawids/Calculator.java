@@ -94,8 +94,17 @@ public class Calculator extends GridPane {
         buttons[21] = new Button("0");
         buttons[22] = new Button(".");
         buttons[23] = new Button("C");
+        buttons[23].setOnAction(event -> {
+            fieldActual.clear();
+            fieldOperation.clear();
+        });
         buttons[24] = new Button("=");
         buttons[25] = new Button("AC");
+        buttons[25].setOnAction(event -> {
+            fieldActual.clear();
+            fieldOperation.clear();
+            fieldResult.clear();
+        });
         for (Button button : buttons) {
             button.prefHeightProperty().bind(heightProperty().divide(8));
             button.prefWidthProperty().bind(widthProperty().divide(5));
