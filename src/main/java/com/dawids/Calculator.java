@@ -107,7 +107,7 @@ public class Calculator extends GridPane {
         for (ButtonOperation operation : ButtonOperation.values()) {
             var button = new CalculatorButton(operation.getSymbol(), operation);
             button.setOnAction(event -> buttonAction(event));
-            buttons.put(operation, new CalculatorButton());
+            buttons.put(operation, button);
         }
 
         for (CalculatorButton button : buttons.values()) {
