@@ -93,6 +93,13 @@ public class Calculator extends GridPane {
         add(fieldActual, 1, 1, 4, 1);
 
         createButtons();
+        for (ButtonOperation operation : ButtonOperation.values()) {
+            if (operation == ButtonOperation.ALL_CLEAR) {
+                break;
+            }
+            add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
+        }
+        add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
     }
 
     private void createButtons() {
