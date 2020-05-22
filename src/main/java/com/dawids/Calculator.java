@@ -155,7 +155,7 @@ public class Calculator extends GridPane {
                 case POINT:
                     addToActual(operation.getSymbol());
                     break;
-
+                //todo memory add to add from result not actual
                 case MEMORY_CLEAR:
                     valueMemory.set(0.0);
                     break;
