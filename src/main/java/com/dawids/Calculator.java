@@ -224,7 +224,41 @@ public class Calculator extends GridPane {
     }
 
     enum ButtonOperation {
+        MEMORY_CLEAR("MC"),
+        MEMORY_SHOW("MS"),
+        MEMORY_ADD("M+"),
+        MEMORY_SUBTRACT("M-"),
+        PERCENT("%"),
+        SEVEN("7"),
+        EIGHT("8"),
+        NINE("9"),
+        ADD("+"),
+        SUBTRACT("-"),
+        FOUR("4"),
+        FIVE("5"),
+        SIX("6"),
+        MULTIPLY("*"),
+        DIVIDE("/"),
+        ONE("1"),
+        TWO("2"),
+        THREE("3"),
+        POWER("^"),
+        ROOT("√"),
+        NEGATE("+/-"),
+        ZERO("0"),
+        POINT("."),
+        CLEAR("AC"),
+        EQUAL("=");
 
+        private final String symbol;
+
+        private ButtonOperation(String symbol) {
+            this.symbol = symbol;
+        }
+
+        private String getSymbol() {
+            return symbol;
+        }
     }
 
     class CalculatorButton extends Button {
