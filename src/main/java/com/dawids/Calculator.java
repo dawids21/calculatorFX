@@ -16,7 +16,6 @@ import javafx.util.StringConverter;
 import java.util.HashMap;
 
 public class Calculator extends GridPane {
-    private final TextField fieldOperation = new TextField();
     private final TextField fieldActual = new TextField();
     private final HashMap<ButtonOperation, CalculatorButton> buttons = new HashMap<>();
     private final Font font = Font.font("Noto Sans");
@@ -76,6 +75,7 @@ public class Calculator extends GridPane {
         formatterResult.valueProperty().bind(valueResult);
         fieldResult.setTextFormatter(formatterResult);
 
+        final var fieldOperation = new TextField();
         fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
         fieldOperation.setFont(font);
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
