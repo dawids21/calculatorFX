@@ -275,6 +275,11 @@ public class Calculator extends GridPane {
             this.operation = operation;
         }
 
+        CalculatorButton(String text, ButtonOperation operation) {
+            super(text);
+            this.operation = operation;
+        }
+
         ButtonOperation getOperation() {
             return operation;
         }
