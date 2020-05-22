@@ -93,7 +93,13 @@ public class Calculator extends GridPane {
         fieldActual.setAlignment(Pos.CENTER_RIGHT);
         fieldActual.setEditable(false);
         fieldActual.setText("0");
-        fieldActual.textProperty().addListener((observable, oldValue, newValue) -> valueActual.set(Double.parseDouble(newValue)));
+        fieldActual.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                valueActual.set(Double.parseDouble(newValue));
+            } else {
+                valueActual.set(0.0);
+            }
+        });
 
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
