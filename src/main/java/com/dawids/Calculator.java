@@ -2,6 +2,7 @@ package com.dawids;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +23,7 @@ public class Calculator extends GridPane {
     private final SimpleDoubleProperty fontSize = new SimpleDoubleProperty(15);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
+    private final SimpleIntegerProperty currentOperation = new SimpleIntegerProperty(ButtonOperation.NONE.ordinal());
 
     public Calculator() {
         super();
@@ -79,6 +81,9 @@ public class Calculator extends GridPane {
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldOperation.setAlignment(Pos.CENTER);
         fieldOperation.setEditable(false);
+        currentOperation.addListener(((observable, oldValue, newValue) -> {
+            fieldOperation.setText(ButtonOperation.values()[(int) newValue].getSymbol());
+        }));
 
         fieldActual.prefWidthProperty().bind(widthProperty().divide(5).multiply(4));
         fieldActual.setFont(font);
