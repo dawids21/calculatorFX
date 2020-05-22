@@ -176,7 +176,7 @@ public class Calculator extends GridPane {
 
         private final String symbol;
 
-        private ButtonOperation(String symbol) {
+        ButtonOperation(String symbol) {
             this.symbol = symbol;
         }
 
@@ -185,18 +185,8 @@ public class Calculator extends GridPane {
         }
     }
 
-    class CalculatorButton extends Button {
+    private static class CalculatorButton extends Button {
         private final ButtonOperation operation;
-
-        CalculatorButton() {
-            super();
-            operation = null;
-        }
-
-        CalculatorButton(ButtonOperation operation) {
-            super();
-            this.operation = operation;
-        }
 
         CalculatorButton(String text, ButtonOperation operation) {
             super(text);
