@@ -216,6 +216,11 @@ public class Calculator extends GridPane {
             case MULTIPLY:
                 valueResult.set(valueResult.get() * valueActual.get());
                 break;
+            case DIVIDE:
+                if (valueActual.get() != 0) {
+                    valueResult.set(valueResult.get() / valueActual.get());
+                }
+                break;
             default:
                 break;
         }
