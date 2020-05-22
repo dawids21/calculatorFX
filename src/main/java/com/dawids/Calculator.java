@@ -173,6 +173,9 @@ public class Calculator extends GridPane {
                     } else {
                         fieldActual.setText(String.valueOf(valueMemory.get()));
                     }
+                    if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
+                        valueResult.set(valueActual.get());
+                    }
                     break;
 
                 case MEMORY_ADD:
