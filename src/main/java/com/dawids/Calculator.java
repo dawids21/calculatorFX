@@ -120,11 +120,11 @@ public class Calculator extends GridPane {
             }
             add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
         }
+        add(buttons.get(ButtonOperation.BACKSPACE), 3, 2);
         add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
     }
 
     private HashMap<ButtonOperation, CalculatorButton> createButtons() {
-        //TODO add backspace
         //todo consider add ANS button
         final var buttons = new HashMap<ButtonOperation, CalculatorButton>();
         for (ButtonOperation operation : ButtonOperation.values()) {
@@ -212,6 +212,9 @@ public class Calculator extends GridPane {
                     break;
                 case EQUAL:
                     performAction();
+                    break;
+                case BACKSPACE:
+                    //todo write logic
                     break;
                 case ALL_CLEAR:
                     fieldActual.setText("0");
@@ -305,6 +308,7 @@ public class Calculator extends GridPane {
         CLEAR("C"),
         EQUAL("="),
         ALL_CLEAR("AC"),
+        BACKSPACE("<"),
         NONE("");
 
         private final String symbol;
