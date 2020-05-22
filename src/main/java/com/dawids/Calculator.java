@@ -224,6 +224,9 @@ public class Calculator extends GridPane {
             case PERCENT:
                 valueResult.set(valueResult.get() * (valueActual.get() / 100));
                 break;
+            case POWER:
+                valueResult.set(Math.pow(valueResult.get(), valueActual.get()));
+                break;
             default:
                 break;
         }
