@@ -184,6 +184,7 @@ public class Calculator extends GridPane {
                 case POWER:
                 case ROOT:
                     currentOperation.set(operation.ordinal());
+                    fieldActual.setText("0");
                     break;
                 case NEGATE:
                     negateActual();
