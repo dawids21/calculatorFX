@@ -176,11 +176,11 @@ public class Calculator extends GridPane {
                     break;
 
                 case MEMORY_ADD:
-                    valueMemory.set(valueMemory.get() + Double.parseDouble(fieldActual.getText()));
+                    valueMemory.set(valueMemory.get() + valueResult.get());
                     break;
 
                 case MEMORY_SUBTRACT:
-                    valueMemory.set(valueMemory.get() - Double.parseDouble(fieldActual.getText()));
+                    valueMemory.set(valueMemory.get() - valueResult.get());
                     break;
 
                 case PERCENT:
