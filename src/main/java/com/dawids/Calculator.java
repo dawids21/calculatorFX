@@ -124,7 +124,69 @@ public class Calculator extends GridPane {
     }
 
     private void buttonAction(ActionEvent event) {
+        if (event.getSource() instanceof CalculatorButton) {
+            ButtonOperation operation = ((CalculatorButton) event.getSource()).getOperation();
+            switch (operation) {
+                case ZERO:
+                case ONE:
+                case TWO:
+                case THREE:
+                case FOUR:
+                case FIVE:
+                case SIX:
+                case SEVEN:
+                case EIGHT:
+                case NINE:
+                case POINT:
+                    addToActual(operation.getSymbol());
+                    break;
 
+                case MEMORY_CLEAR:
+                    valueMemory.set(0.0);
+                    break;
+
+                case MEMORY_SHOW:
+                    if (valueMemory.get() % 1 == 0) {
+                        fieldActual.setText(String.valueOf((int) valueMemory.get()));
+                    } else {
+                        fieldActual.setText(String.valueOf(valueMemory.get()));
+                    }
+                    break;
+
+                case MEMORY_ADD:
+                    valueMemory.set(valueMemory.get() + Double.parseDouble(fieldActual.getText()));
+                    break;
+
+                case MEMORY_SUBTRACT:
+                    valueMemory.set(valueMemory.get() - Double.parseDouble(fieldActual.getText()));
+                    break;
+
+                case PERCENT:
+                case ADD:
+                case SUBTRACT:
+                case MULTIPLY:
+                case DIVIDE:
+                case POWER:
+                case ROOT:
+                    currentOperation.set(operation.ordinal());
+                    break;
+                case NEGATE:
+                    negateActual();
+                    break;
+                case CLEAR:
+                    fieldActual.setText("0.0");
+                    currentOperation.set(ButtonOperation.NONE.ordinal());
+                    break;
+                case EQUAL:
+                    //todo add logic
+                    break;
+                case ALL_CLEAR:
+                    fieldActual.setText("0.0");
+                    currentOperation.set(ButtonOperation.NONE.ordinal());
+                    valueResult.set(0.0);
+                    break;
+            }
+        }
     }
 
     private void addToActual(String text) {
