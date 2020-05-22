@@ -188,14 +188,14 @@ public class Calculator extends GridPane {
                     negateActual();
                     break;
                 case CLEAR:
-                    fieldActual.setText("0.0");
+                    fieldActual.setText("0");
                     currentOperation.set(ButtonOperation.NONE.ordinal());
                     break;
                 case EQUAL:
                     //todo add logic
                     break;
                 case ALL_CLEAR:
-                    fieldActual.setText("0.0");
+                    fieldActual.setText("0");
                     currentOperation.set(ButtonOperation.NONE.ordinal());
                     valueResult.set(0.0);
                     break;
