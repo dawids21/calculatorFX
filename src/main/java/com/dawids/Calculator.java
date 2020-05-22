@@ -18,7 +18,6 @@ import java.util.HashMap;
 public class Calculator extends GridPane {
     private static final String FONT_NAME = "Noto Sans";
     private final TextField fieldActual = new TextField();
-    private final SimpleDoubleProperty fontSize = new SimpleDoubleProperty(15);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
     private final SimpleIntegerProperty currentOperation = new SimpleIntegerProperty(ButtonOperation.NONE.ordinal());
@@ -30,6 +29,7 @@ public class Calculator extends GridPane {
         setHgap(5);
         setVgap(5);
         final var font = Font.font(FONT_NAME);
+        final var fontSize = new SimpleDoubleProperty(15);
         fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
 
         var fieldMemory = new TextField();
@@ -117,6 +117,8 @@ public class Calculator extends GridPane {
         }
 
         final var font = Font.font(FONT_NAME);
+        final var fontSize = new SimpleDoubleProperty();
+        fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
         for (CalculatorButton button : buttons.values()) {
             button.prefHeightProperty().bind(heightProperty().divide(8));
             button.prefWidthProperty().bind(widthProperty().divide(5));
