@@ -17,7 +17,9 @@ import java.util.HashMap;
 
 public class Calculator extends GridPane {
     private static final String FONT_NAME = "Noto Sans";
+
     private final TextField fieldActual = new TextField();
+    private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
     private final SimpleIntegerProperty currentOperation = new SimpleIntegerProperty(ButtonOperation.NONE.ordinal());
@@ -91,6 +93,7 @@ public class Calculator extends GridPane {
         fieldActual.setAlignment(Pos.CENTER_RIGHT);
         fieldActual.setEditable(false);
         fieldActual.setText("0");
+        fieldActual.textProperty().addListener((observable, oldValue, newValue) -> valueActual.set(Double.parseDouble(newValue)));
 
         add(fieldMemory, 0, 0, 2, 1);
         add(fieldResult, 2, 0, 3, 1);
