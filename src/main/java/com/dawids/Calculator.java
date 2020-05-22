@@ -172,7 +172,8 @@ public class Calculator extends GridPane {
         POINT("."),
         CLEAR("C"),
         EQUAL("="),
-        ALL_CLEAR("AC");
+        ALL_CLEAR("AC"),
+        NONE("");
 
         private final String symbol;
 
