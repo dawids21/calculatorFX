@@ -222,4 +222,26 @@ public class Calculator extends GridPane {
             fieldActual.setText("-" + actualText);
         }
     }
+
+    enum ButtonOperation {
+
+    }
+
+    class CalculatorButton extends Button {
+        private final ButtonOperation operation;
+
+        CalculatorButton() {
+            super();
+            operation = null;
+        }
+
+        CalculatorButton(ButtonOperation operation) {
+            super();
+            this.operation = operation;
+        }
+
+        ButtonOperation getOperation() {
+            return operation;
+        }
+    }
 }
