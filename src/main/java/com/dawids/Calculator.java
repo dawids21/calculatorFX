@@ -194,7 +194,7 @@ public class Calculator extends GridPane {
                     currentOperation.set(ButtonOperation.NONE.ordinal());
                     break;
                 case EQUAL:
-                    //todo add logic
+                    performAction();
                     break;
                 case ALL_CLEAR:
                     fieldActual.setText("0");
@@ -203,6 +203,18 @@ public class Calculator extends GridPane {
                     break;
             }
         }
+    }
+
+    private void performAction() {
+        switch (ButtonOperation.values()[currentOperation.get()]) {
+            case ADD:
+                valueResult.set(valueResult.get() + valueActual.get());
+                break;
+            default:
+                break;
+        }
+        fieldActual.setText("0");
+        currentOperation.set(ButtonOperation.NONE.ordinal());
     }
 
     private void addToActual(String text) {
