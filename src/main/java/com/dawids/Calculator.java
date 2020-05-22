@@ -214,7 +214,15 @@ public class Calculator extends GridPane {
                     performAction();
                     break;
                 case BACKSPACE:
-                    //todo write logic
+                    final var actualText = fieldActual.getText();
+                    if (actualText.length() == 1) {
+                        fieldActual.setText("0");
+                    } else {
+                        fieldActual.setText(fieldActual.getText(0, fieldActual.getText().length() - 1));
+                    }
+                    if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
+                        valueResult.set(valueActual.get());
+                    }
                     break;
                 case ALL_CLEAR:
                     fieldActual.setText("0");
