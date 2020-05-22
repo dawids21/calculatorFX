@@ -118,6 +118,7 @@ public class Calculator extends GridPane {
 
     private HashMap<ButtonOperation, CalculatorButton> createButtons() {
         //TODO add backspace
+        //todo consider add ANS button
         final var buttons = new HashMap<ButtonOperation, CalculatorButton>();
         for (ButtonOperation operation : ButtonOperation.values()) {
             var button = new CalculatorButton(operation.getSymbol(), operation);
