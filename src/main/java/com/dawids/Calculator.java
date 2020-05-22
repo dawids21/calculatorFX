@@ -202,6 +202,7 @@ public class Calculator extends GridPane {
                 case ROOT:
                     valueResult.set(Math.sqrt(valueResult.get()));
                     fieldActual.setText("0");
+                    currentOperation.set(ButtonOperation.NONE.ordinal());
                     break;
                 case NEGATE:
                     negateActual();
