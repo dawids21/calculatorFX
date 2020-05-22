@@ -218,6 +218,9 @@ public class Calculator extends GridPane {
         } else {
             fieldActual.setText(actualText + text);
         }
+        if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
+            valueResult.set(valueActual.get());
+        }
     }
 
     private void negateActual() {
