@@ -13,10 +13,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.StringConverter;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Calculator extends GridPane {
     private static final String FONT_NAME = "Noto Sans";
+    private static final ButtonOperation[] PERFORMING_OPERATIONS = {ButtonOperation.PERCENT,
+                                                                    ButtonOperation.ADD,
+                                                                    ButtonOperation.SUBTRACT,
+                                                                    ButtonOperation.MULTIPLY,
+                                                                    ButtonOperation.DIVIDE,
+                                                                    ButtonOperation.POWER};
 
     private final TextField fieldActual = new TextField();
     private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
@@ -182,6 +189,10 @@ public class Calculator extends GridPane {
                 case MULTIPLY:
                 case DIVIDE:
                 case POWER:
+                    if (Arrays.asList(PERFORMING_OPERATIONS)
+                              .contains(ButtonOperation.values()[currentOperation.get()])) {
+                        performAction();
+                    }
                     currentOperation.set(operation.ordinal());
                     fieldActual.setText("0");
                     break;
