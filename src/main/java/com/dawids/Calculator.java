@@ -182,8 +182,11 @@ public class Calculator extends GridPane {
                 case MULTIPLY:
                 case DIVIDE:
                 case POWER:
-                case ROOT:
                     currentOperation.set(operation.ordinal());
+                    fieldActual.setText("0");
+                    break;
+                case ROOT:
+                    valueResult.set(Math.sqrt(valueResult.get()));
                     fieldActual.setText("0");
                     break;
                 case NEGATE:
