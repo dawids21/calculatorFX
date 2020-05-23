@@ -120,8 +120,8 @@ public class Calculator extends GridPane {
             }
             add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
         }
-        add(buttons.get(ButtonOperation.ANSWER), 2, 2);
-        add(buttons.get(ButtonOperation.BACKSPACE), 3, 2);
+        add(buttons.get(ButtonOperation.CLEAR), 3, 2);
+        add(buttons.get(ButtonOperation.BACKSPACE), 0, 2);
         add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
     }
 
@@ -323,11 +323,11 @@ public class Calculator extends GridPane {
         NEGATE("+/-"),
         ZERO("0"),
         POINT("."),
-        CLEAR("C"),
+        ANSWER("ANS"),
         EQUAL("="),
         ALL_CLEAR("AC"),
         BACKSPACE("<"),
-        ANSWER("ANS"),
+        CLEAR("C"),
         NONE("");
 
         private final String symbol;
