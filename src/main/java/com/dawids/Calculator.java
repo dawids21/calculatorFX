@@ -233,6 +233,10 @@ public class Calculator extends GridPane {
                     break;
                 case ANSWER:
                     //todo create action
+                    fieldActual.setText(String.valueOf(answer.get()));
+                    if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
+                        valueResult.set(valueActual.get());
+                    }
                     break;
             }
         }
