@@ -14,6 +14,7 @@ public class App extends Application {
     public void start(Stage stage) {
         var gridPane = new Calculator();
         var scene = new Scene(gridPane, 400, 500);
+        stage.setTitle("CalculatorFX");
         stage.setScene(scene);
         gridPane.requestFocus();
         stage.show();
