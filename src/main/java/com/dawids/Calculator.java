@@ -113,20 +113,10 @@ public class Calculator extends GridPane {
         add(fieldOperation, 0, 1);
         add(fieldActual, 1, 1, 4, 1);
 
-        final var buttons = createButtons();
-        for (ButtonOperation operation : ButtonOperation.values()) {
-            if (operation == ButtonOperation.ALL_CLEAR) {
-                break;
-            }
-            add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
-        }
-        add(buttons.get(ButtonOperation.CLEAR), 3, 2);
-        add(buttons.get(ButtonOperation.BACKSPACE), 0, 2);
-        add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
+        createButtons();
     }
 
-    private HashMap<ButtonOperation, CalculatorButton> createButtons() {
-        //todo consider add ANS button
+    private void createButtons() {
         final var buttons = new HashMap<ButtonOperation, CalculatorButton>();
         for (ButtonOperation operation : ButtonOperation.values()) {
             var button = new CalculatorButton(operation.getSymbol(), operation);
@@ -143,7 +133,15 @@ public class Calculator extends GridPane {
             button.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
             button.setFont(font);
         }
-        return buttons;
+        for (ButtonOperation operation : ButtonOperation.values()) {
+            if (operation == ButtonOperation.ALL_CLEAR) {
+                break;
+            }
+            add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
+        }
+        add(buttons.get(ButtonOperation.CLEAR), 3, 2);
+        add(buttons.get(ButtonOperation.BACKSPACE), 0, 2);
+        add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
     }
 
     private void buttonAction(ActionEvent event) {
