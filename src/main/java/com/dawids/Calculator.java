@@ -38,17 +38,26 @@ public class Calculator extends GridPane {
         setPadding(new Insets(10));
         setHgap(5);
         setVgap(5);
+
+        createTextFields();
+        createButtons();
+    }
+
+    private void createTextFields() {
         final var font = Font.font(FONT_NAME);
         final var fontSize = new SimpleDoubleProperty(15);
+        final var fieldMemory = new TextField();
+        final var fieldResult = new TextField();
+        final var fieldOperation = new TextField();
+
         fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
 
-        var fieldMemory = new TextField();
         fieldMemory.prefWidthProperty().bind(widthProperty().divide(5).multiply(2));
         fieldMemory.setFont(font);
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
         fieldMemory.setAlignment(Pos.CENTER_RIGHT);
-        var converterMemory = new StringConverter<Number>() {
+        final var formatterMemory = new TextFormatter<>(new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
                 return String.valueOf(object);
@@ -58,18 +67,16 @@ public class Calculator extends GridPane {
             public Number fromString(String string) {
                 return Double.parseDouble(string);
             }
-        };
-        var formatterMemory = new TextFormatter<>(converterMemory);
+        });
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
-        var fieldResult = new TextField();
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldResult.setEditable(false);
         fieldResult.setAlignment(Pos.CENTER_RIGHT);
-        var converterResult = new StringConverter<Number>() {
+        final var formatterResult = new TextFormatter<>(new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
                 return String.valueOf(object);
@@ -80,12 +87,10 @@ public class Calculator extends GridPane {
             public Number fromString(String string) {
                 return Double.parseDouble(string);
             }
-        };
-        var formatterResult = new TextFormatter<>(converterResult);
+        });
         formatterResult.valueProperty().bind(valueResult);
         fieldResult.setTextFormatter(formatterResult);
 
-        final var fieldOperation = new TextField();
         fieldOperation.prefWidthProperty().bind(widthProperty().divide(5));
         fieldOperation.setFont(font);
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
@@ -112,8 +117,6 @@ public class Calculator extends GridPane {
         add(fieldResult, 2, 0, 3, 1);
         add(fieldOperation, 0, 1);
         add(fieldActual, 1, 1, 4, 1);
-
-        createButtons();
     }
 
     private void createButtons() {
