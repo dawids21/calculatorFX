@@ -29,6 +29,7 @@ public class Calculator extends GridPane {
     private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
+    private final SimpleDoubleProperty answer = new SimpleDoubleProperty(0.0);
     private final SimpleIntegerProperty currentOperation = new SimpleIntegerProperty(ButtonOperation.NONE.ordinal());
 
     public Calculator() {
@@ -200,6 +201,7 @@ public class Calculator extends GridPane {
                     break;
                 case ROOT:
                     valueResult.set(Math.sqrt(valueResult.get()));
+                    answer.set(valueResult.get());
                     fieldActual.setText("0");
                     currentOperation.set(ButtonOperation.NONE.ordinal());
                     break;
@@ -261,6 +263,7 @@ public class Calculator extends GridPane {
             default:
                 break;
         }
+        answer.set(valueResult.get());
         fieldActual.setText("0");
         currentOperation.set(ButtonOperation.NONE.ordinal());
     }
