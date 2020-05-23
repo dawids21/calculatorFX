@@ -90,9 +90,8 @@ public class Calculator extends GridPane {
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldOperation.setAlignment(Pos.CENTER);
         fieldOperation.setEditable(false);
-        currentOperation.addListener(((observable, oldValue, newValue) -> {
-            fieldOperation.setText(ButtonOperation.values()[(int) newValue].getSymbol());
-        }));
+        currentOperation.addListener(((observable, oldValue, newValue) -> fieldOperation.setText(ButtonOperation.values()[(int) newValue]
+                                                                                                         .getSymbol())));
 
         fieldActual.prefWidthProperty().bind(widthProperty().divide(5).multiply(4));
         fieldActual.setFont(font);
