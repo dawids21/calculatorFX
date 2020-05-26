@@ -57,28 +57,7 @@ public class Calculator extends GridPane {
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
         fieldMemory.setAlignment(Pos.CENTER_RIGHT);
-        final var formatterMemory = new TextFormatter<>(new StringConverter<Number>() {
-            @Override
-            public String toString(Number object) {
-                if (object.doubleValue() % 1 == 0) {
-                    if (object.doubleValue() <= 2147483647.0) {
-                        return String.format("%d", object.intValue());
-                    } else {
-                        return String.format("%.4E", object.doubleValue());
-                    }
-                } else {
-                    if (String.valueOf(object.doubleValue()).length() <= 10) {
-                        return String.valueOf(object.doubleValue());
-                    } else {
-                        return String.format("%.4E", object.doubleValue());
-                    }
-                }
-            }
-
-            public Number fromString(String string) {
-                return Double.parseDouble(string);
-            }
-        });
+        final var formatterMemory = new TextFormatter<>(new FieldsStringConverter());
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
@@ -87,29 +66,7 @@ public class Calculator extends GridPane {
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldResult.setEditable(false);
         fieldResult.setAlignment(Pos.CENTER_RIGHT);
-        final var formatterResult = new TextFormatter<>(new StringConverter<Number>() {
-            @Override
-            public String toString(Number object) {
-                if (object.doubleValue() % 1 == 0) {
-                    if (object.doubleValue() <= 2147483647.0) {
-                        return String.format("%d", object.intValue());
-                    } else {
-                        return String.format("%.4E", object.doubleValue());
-                    }
-                } else {
-                    if (String.valueOf(object.doubleValue()).length() <= 10) {
-                        return String.valueOf(object.doubleValue());
-                    } else {
-                        return String.format("%.4E", object.doubleValue());
-                    }
-                }
-            }
-
-            @Override
-            public Number fromString(String string) {
-                return Double.parseDouble(string);
-            }
-        });
+        final var formatterResult = new TextFormatter<>(new FieldsStringConverter());
         formatterResult.valueProperty().bind(valueResult);
         fieldResult.setTextFormatter(formatterResult);
 
@@ -377,6 +334,29 @@ public class Calculator extends GridPane {
 
         ButtonOperation getOperation() {
             return operation;
+        }
+    }
+
+    private class FieldsStringConverter extends StringConverter<Number> {
+        @Override
+        public String toString(Number object) {
+            if (object.doubleValue() % 1 == 0) {
+                if (object.doubleValue() <= 2147483647.0) {
+                    return String.format("%d", object.intValue());
+                } else {
+                    return String.format("%.4E", object.doubleValue());
+                }
+            } else {
+                if (String.valueOf(object.doubleValue()).length() <= 10) {
+                    return String.valueOf(object.doubleValue());
+                } else {
+                    return String.format("%.4E", object.doubleValue());
+                }
+            }
+        }
+
+        public Number fromString(String string) {
+            return Double.parseDouble(string);
         }
     }
 }
