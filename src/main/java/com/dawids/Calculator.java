@@ -337,7 +337,7 @@ public class Calculator extends GridPane {
         }
     }
 
-    private class FieldsStringConverter extends StringConverter<Number> {
+    private static class FieldsStringConverter extends StringConverter<Number> {
         @Override
         public String toString(Number object) {
             if (object.doubleValue() % 1 == 0) {
