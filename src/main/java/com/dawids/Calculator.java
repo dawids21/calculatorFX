@@ -60,8 +60,19 @@ public class Calculator extends GridPane {
         final var formatterMemory = new TextFormatter<>(new StringConverter<Number>() {
             @Override
             public String toString(Number object) {
-                return String.valueOf(object);
-                //TODO add conversion
+                if (object.doubleValue() % 1 == 0) {
+                    if (object.doubleValue() <= 2147483647.0) {
+                        return String.format("%d", object.intValue());
+                    } else {
+                        return String.format("%.4E", object.doubleValue());
+                    }
+                } else {
+                    if (String.valueOf(object.doubleValue()).length() <= 10) {
+                        return String.valueOf(object.doubleValue());
+                    } else {
+                        return String.format("%.4E", object.doubleValue());
+                    }
+                }
             }
 
             public Number fromString(String string) {
