@@ -17,7 +17,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Calculator extends GridPane {
+    //Font for buttons and text fields
     private static final String FONT_NAME = "Noto Sans";
+    //Array of operations that should be performed if another operation is chosen
     private static final ButtonOperation[] PERFORMING_OPERATIONS = {ButtonOperation.PERCENT,
                                                                     ButtonOperation.ADD,
                                                                     ButtonOperation.SUBTRACT,
@@ -25,11 +27,15 @@ public class Calculator extends GridPane {
                                                                     ButtonOperation.DIVIDE,
                                                                     ButtonOperation.POWER};
 
+    //Field with input from user
     private final TextField fieldActual = new TextField();
+    //Value of input text field
     private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
+    //This field contains answer for use with ANS button
     private final SimpleDoubleProperty answer = new SimpleDoubleProperty(0.0);
+    //Property with ordinal value of current operation enum
     private final SimpleIntegerProperty currentOperation = new SimpleIntegerProperty(ButtonOperation.NONE.ordinal());
 
     public Calculator() {
