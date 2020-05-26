@@ -170,7 +170,7 @@ public class Calculator extends GridPane {
 
                 case MEMORY_SHOW:
                     if (valueMemory.get() % 1 == 0) {
-                        fieldActual.setText(String.valueOf((int) valueMemory.get()));
+                        fieldActual.setText(String.format("%.0f", valueMemory.get()));
                     } else {
                         fieldActual.setText(String.valueOf(valueMemory.get()));
                     }
