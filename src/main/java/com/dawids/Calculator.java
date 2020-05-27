@@ -157,6 +157,7 @@ public class Calculator extends GridPane {
                     valueMemory.set(0.0);
                     break;
 
+                //Put value from memory to actual
                 case MEMORY_SHOW:
                     if (valueMemory.get() % 1 == 0) {
                         fieldActual.setText(String.format("%.0f", valueMemory.get()));
@@ -182,6 +183,8 @@ public class Calculator extends GridPane {
                 case MULTIPLY:
                 case DIVIDE:
                 case POWER:
+                    //No need to press equal sign after every operation
+                    //Each operation in this list will be performed after pressing another one
                     if (Arrays.asList(PERFORMING_OPERATIONS)
                               .contains(ButtonOperation.values()[currentOperation.get()])) {
                         performAction();
@@ -222,6 +225,7 @@ public class Calculator extends GridPane {
                     valueResult.set(0.0);
                     break;
                 case ANSWER:
+                    //Put answer from previous operation to actual field
                     if (answer.get() % 1 == 0) {
                         fieldActual.setText(String.format("%.0f", answer.get()));
                     } else {
