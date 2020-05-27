@@ -50,6 +50,7 @@ public class Calculator extends GridPane {
     }
 
     private void createTextFields() {
+        //Each filed is bound to window height and width so they are changing their size to fill all space
         final var font = Font.font(FONT_NAME);
         final var fontSize = new SimpleDoubleProperty(15);
         final var fieldMemory = new TextField();
@@ -63,6 +64,7 @@ public class Calculator extends GridPane {
         fieldMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldMemory.setEditable(false);
         fieldMemory.setAlignment(Pos.CENTER_RIGHT);
+        //Formatter shows big numbers in scientific notation
         final var formatterMemory = new TextFormatter<>(new FieldsStringConverter());
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
@@ -81,6 +83,7 @@ public class Calculator extends GridPane {
         fieldOperation.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldOperation.setAlignment(Pos.CENTER);
         fieldOperation.setEditable(false);
+        //Each operation is stored in enum and has a symbol to display in this field
         currentOperation.addListener(((observable, oldValue, newValue) -> fieldOperation.setText(ButtonOperation.values()[(int) newValue]
                                                                                                          .getSymbol())));
 
