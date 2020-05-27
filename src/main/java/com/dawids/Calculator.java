@@ -342,6 +342,7 @@ public class Calculator extends GridPane {
     }
 
     private static class CalculatorButton extends Button {
+        //Each button has an operation assigned
         private final ButtonOperation operation;
 
         CalculatorButton(String text, ButtonOperation operation) {
