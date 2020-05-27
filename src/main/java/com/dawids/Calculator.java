@@ -108,7 +108,7 @@ public class Calculator extends GridPane {
         final var buttons = new HashMap<ButtonOperation, CalculatorButton>();
         for (ButtonOperation operation : ButtonOperation.values()) {
             var button = new CalculatorButton(operation.getSymbol(), operation);
-            button.setOnAction(event -> buttonAction(event));
+            button.setOnAction(this::buttonAction);
             buttons.put(operation, button);
         }
 
