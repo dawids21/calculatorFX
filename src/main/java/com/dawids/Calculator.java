@@ -355,6 +355,7 @@ public class Calculator extends GridPane {
         }
     }
 
+    //This converter transform numbers to scientific notation when they are too big
     private static class FieldsStringConverter extends StringConverter<Number> {
         @Override
         public String toString(Number object) {
