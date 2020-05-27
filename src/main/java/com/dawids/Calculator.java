@@ -108,6 +108,7 @@ public class Calculator extends GridPane {
     }
 
     private void createButtons() {
+        //Each button has assigned operation and is bound to window dimensions so its size matches window size
         final var buttons = new HashMap<ButtonOperation, CalculatorButton>();
         for (ButtonOperation operation : ButtonOperation.values()) {
             var button = new CalculatorButton(operation.getSymbol(), operation);
