@@ -271,17 +271,20 @@ public class Calculator extends GridPane {
 
     private void addToActual(String text) {
         var actualText = fieldActual.getText();
+        //Only one point is acceptable
         if (text.equals(".")) {
             if (!actualText.contains(".")) {
                 fieldActual.setText(actualText + text);
             }
         } else if (actualText.equals("0")) {
+            //At start 0 is changed to the first number
             fieldActual.setText(text);
         } else if (actualText.equals("-0")) {
             fieldActual.setText("-" + text);
         } else {
             fieldActual.setText(actualText + text);
         }
+        //If there is no operation set every character is put to actualField as well as resultField
         if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
             valueResult.set(valueActual.get());
         }
