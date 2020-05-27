@@ -360,8 +360,8 @@ public class Calculator extends GridPane {
         @Override
         public String toString(Number object) {
             if (object.doubleValue() % 1 == 0) {
-                if (object.doubleValue() <= 2147483647.0) {
-                    return String.format("%d", object.intValue());
+                if (String.valueOf(object.longValue()).length() <= 10) {
+                    return String.format("%d", object.longValue());
                 } else {
                     return String.format("%.4E", object.doubleValue());
                 }
