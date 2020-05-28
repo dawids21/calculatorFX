@@ -33,7 +33,8 @@ public class Calculator extends GridPane {
     //Field with input from user
     private final TextField fieldActual = new TextField();
     //Value of input text field
-    private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
+    private final SimpleObjectProperty<BigDecimal> valueActual = new SimpleObjectProperty<>(new BigDecimal("0.0",
+                                                                                                           MathContext.DECIMAL32));
     private final SimpleObjectProperty<BigDecimal> valueResult = new SimpleObjectProperty<>(new BigDecimal("0.0",
                                                                                                            MathContext.DECIMAL32));
     private final SimpleObjectProperty<BigDecimal> valueMemory = new SimpleObjectProperty<>(new BigDecimal("0.0",
@@ -120,9 +121,9 @@ public class Calculator extends GridPane {
         fieldActual.setText("0");
         fieldActual.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.isEmpty()) {
-                valueActual.set(Double.parseDouble(newValue));
+                valueActual.set(new BigDecimal(newValue, MathContext.DECIMAL32));
             } else {
-                valueActual.set(0.0);
+                valueActual.set(new BigDecimal("0.0", MathContext.DECIMAL32));
             }
         });
 
@@ -186,7 +187,7 @@ public class Calculator extends GridPane {
                 case MEMORY_SHOW:
                     fieldActual.setText(valueMemory.get().stripTrailingZeros().toString());
                     if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
-                        valueResult.set(new BigDecimal(valueActual.get(), MathContext.DECIMAL32));
+                        valueResult.set(new BigDecimal(valueActual.get().toString(), MathContext.DECIMAL32));
                     }
                     break;
 
@@ -237,7 +238,7 @@ public class Calculator extends GridPane {
                         fieldActual.setText(fieldActual.getText(0, fieldActual.getText().length() - 1));
                     }
                     if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
-                        valueResult.set(new BigDecimal(valueActual.get(), MathContext.DECIMAL32));
+                        valueResult.set(new BigDecimal(valueActual.get().toString(), MathContext.DECIMAL32));
                     }
                     break;
                 case ALL_CLEAR:
@@ -253,7 +254,7 @@ public class Calculator extends GridPane {
                         fieldActual.setText(String.valueOf(answer.get()));
                     }
                     if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
-                        valueResult.set(new BigDecimal(valueActual.get(), MathContext.DECIMAL32));
+                        valueResult.set(new BigDecimal(valueActual.get().toString(), MathContext.DECIMAL32));
                     }
                     break;
             }
@@ -263,27 +264,27 @@ public class Calculator extends GridPane {
     private void performAction() {
         switch (ButtonOperation.values()[currentOperation.get()]) {
             case ADD:
-                valueResult.set(valueResult.get().add(BigDecimal.valueOf(valueActual.get())));
+                valueResult.set(valueResult.get().add(valueActual.get()));
                 break;
             case SUBTRACT:
-                valueResult.set(valueResult.get().subtract(BigDecimal.valueOf(valueActual.get())));
+                valueResult.set(valueResult.get().subtract(valueActual.get()));
                 break;
             case MULTIPLY:
-                valueResult.set(valueResult.get().multiply(BigDecimal.valueOf(valueActual.get())));
+                valueResult.set(valueResult.get().multiply(valueActual.get()));
                 break;
             case DIVIDE:
-                if (valueActual.get() != 0) {
-                    valueResult.set(valueResult.get()
-                                               .divide(BigDecimal.valueOf(valueActual.get()), MathContext.DECIMAL32));
+                if (!valueActual.get().toString().equals("0.0")) {
+                    valueResult.set(valueResult.get().divide(valueResult.get(), MathContext.DECIMAL32));
                 }
                 break;
             case PERCENT:
                 valueResult.set(valueResult.get()
-                                           .multiply(BigDecimal.valueOf(valueActual.get()))
-                                           .divide(BigDecimal.valueOf(100), MathContext.DECIMAL32));
+                                           .multiply(valueActual.get())
+                                           .divide(BigDecimal.valueOf(100.0), MathContext.DECIMAL32));
                 break;
             case POWER:
-                valueResult.set(new BigDecimal(Math.pow(valueResult.get().doubleValue(), valueActual.get()),
+                valueResult.set(new BigDecimal(Math.pow(valueResult.get().doubleValue(),
+                                                        valueActual.get().doubleValue()),
                                                MathContext.DECIMAL32));
                 break;
             default:
@@ -311,7 +312,7 @@ public class Calculator extends GridPane {
         }
         //If there is no operation set every character is put to actualField as well as resultField
         if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
-            valueResult.set(new BigDecimal(valueActual.get(), MathContext.DECIMAL32));
+            valueResult.set(new BigDecimal(valueActual.get().toString(), MathContext.DECIMAL32));
         }
     }
 
