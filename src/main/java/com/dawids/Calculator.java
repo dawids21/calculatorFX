@@ -71,17 +71,7 @@ public class Calculator extends GridPane {
         fieldMemory.setEditable(false);
         fieldMemory.setAlignment(Pos.CENTER_RIGHT);
         //Formatter shows big numbers in scientific notation
-        final var formatterMemory = new TextFormatter<>(new StringConverter<BigDecimal>() {
-            @Override
-            public String toString(BigDecimal object) {
-                return object.round(MathContext.DECIMAL32).toString();
-            }
-
-            @Override
-            public BigDecimal fromString(String string) {
-                return new BigDecimal(string);
-            }
-        });
+        final var formatterMemory = new TextFormatter<>(new FieldsStringConverter());
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
@@ -90,17 +80,7 @@ public class Calculator extends GridPane {
         fieldResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         fieldResult.setEditable(false);
         fieldResult.setAlignment(Pos.CENTER_RIGHT);
-        final var formatterResult = new TextFormatter<>(new StringConverter<BigDecimal>() {
-            @Override
-            public String toString(BigDecimal object) {
-                return object.round(MathContext.DECIMAL32).toString(); //todo check if decimal64 fits
-            }
-
-            @Override
-            public BigDecimal fromString(String string) {
-                return new BigDecimal(string);
-            }
-        });
+        final var formatterResult = new TextFormatter<>(new FieldsStringConverter());
         formatterResult.valueProperty().bind(valueResult);
         fieldResult.setTextFormatter(formatterResult);
 
@@ -382,26 +362,15 @@ public class Calculator extends GridPane {
     }
 
     //This converter transform numbers to scientific notation when they are too big
-    private static class FieldsStringConverter extends StringConverter<Number> {
+    private static class FieldsStringConverter extends StringConverter<BigDecimal> {
         @Override
-        public String toString(Number object) {
-            if (object.doubleValue() % 1 == 0) {
-                if (String.valueOf(object.longValue()).length() <= 10) {
-                    return String.format("%d", object.longValue());
-                } else {
-                    return String.format("%.4E", object.doubleValue());
-                }
-            } else {
-                if (String.valueOf(object.doubleValue()).length() <= 10) {
-                    return String.valueOf(object.doubleValue());
-                } else {
-                    return String.format("%.4E", object.doubleValue());
-                }
-            }
+        public String toString(BigDecimal object) {
+            return object.round(MathContext.DECIMAL32).toString();
         }
 
-        public Number fromString(String string) {
-            return Double.parseDouble(string);
+        @Override
+        public BigDecimal fromString(String string) {
+            return new BigDecimal(string);
         }
     }
 }
