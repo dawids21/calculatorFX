@@ -36,7 +36,8 @@ public class Calculator extends GridPane {
     private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
     private final SimpleObjectProperty<BigDecimal> valueResult = new SimpleObjectProperty<>(new BigDecimal("0.0",
                                                                                                            MathContext.DECIMAL32));
-    private final SimpleObjectProperty<BigDecimal> valueMemory = new SimpleObjectProperty<>(BigDecimal.ZERO);
+    private final SimpleObjectProperty<BigDecimal> valueMemory = new SimpleObjectProperty<>(new BigDecimal("0.0",
+                                                                                                           MathContext.DECIMAL32));
     //This field contains answer for use with ANS button
     private final SimpleDoubleProperty answer = new SimpleDoubleProperty(0.0);
     //Property with ordinal value of current operation enum
@@ -178,7 +179,7 @@ public class Calculator extends GridPane {
                     addToActual(operation.getSymbol());
                     break;
                 case MEMORY_CLEAR:
-                    valueMemory.set(BigDecimal.ZERO);
+                    valueMemory.set(new BigDecimal("0.0", MathContext.DECIMAL32));
                     break;
 
                 //Put value from memory to actual
