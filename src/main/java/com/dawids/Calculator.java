@@ -3,6 +3,7 @@ package com.dawids;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.StringConverter;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -32,7 +35,7 @@ public class Calculator extends GridPane {
     //Value of input text field
     private final SimpleDoubleProperty valueActual = new SimpleDoubleProperty(0.0);
     private final SimpleDoubleProperty valueResult = new SimpleDoubleProperty(0.0);
-    private final SimpleDoubleProperty valueMemory = new SimpleDoubleProperty(0.0);
+    private final SimpleObjectProperty<BigDecimal> valueMemory = new SimpleObjectProperty<>(BigDecimal.ZERO);
     //This field contains answer for use with ANS button
     private final SimpleDoubleProperty answer = new SimpleDoubleProperty(0.0);
     //Property with ordinal value of current operation enum
@@ -65,7 +68,17 @@ public class Calculator extends GridPane {
         fieldMemory.setEditable(false);
         fieldMemory.setAlignment(Pos.CENTER_RIGHT);
         //Formatter shows big numbers in scientific notation
-        final var formatterMemory = new TextFormatter<>(new FieldsStringConverter());
+        final var formatterMemory = new TextFormatter<>(new StringConverter<BigDecimal>() {
+            @Override
+            public String toString(BigDecimal object) {
+                return object.round(MathContext.DECIMAL32).toString();
+            }
+
+            @Override
+            public BigDecimal fromString(String string) {
+                return new BigDecimal(string);
+            }
+        });
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
 
@@ -154,27 +167,23 @@ public class Calculator extends GridPane {
                     addToActual(operation.getSymbol());
                     break;
                 case MEMORY_CLEAR:
-                    valueMemory.set(0.0);
+                    valueMemory.set(BigDecimal.ZERO);
                     break;
 
                 //Put value from memory to actual
                 case MEMORY_SHOW:
-                    if (valueMemory.get() % 1 == 0) {
-                        fieldActual.setText(String.format("%.0f", valueMemory.get()));
-                    } else {
-                        fieldActual.setText(String.valueOf(valueMemory.get()));
-                    }
+                    fieldActual.setText(valueMemory.get().stripTrailingZeros().toString());
                     if (ButtonOperation.values()[currentOperation.get()] == ButtonOperation.NONE) {
                         valueResult.set(valueActual.get());
                     }
                     break;
 
                 case MEMORY_ADD:
-                    valueMemory.set(valueMemory.get() + valueResult.get());
+                    valueMemory.set(valueMemory.get().add(BigDecimal.valueOf(valueResult.get())));
                     break;
 
                 case MEMORY_SUBTRACT:
-                    valueMemory.set(valueMemory.get() - valueResult.get());
+                    valueMemory.set(valueMemory.get().subtract(BigDecimal.valueOf(valueResult.get())));
                     break;
 
                 case PERCENT:
