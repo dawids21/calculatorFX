@@ -64,6 +64,7 @@ public class Calculator extends GridPane {
         final var fontSize = new SimpleDoubleProperty(15);
         final var labelMemory = new Label("Memory:");
         final var fieldMemory = new TextField();
+        final var labelResult = new Label("Result:");
         final var fieldResult = new TextField();
         final var fieldOperation = new TextField();
 
@@ -82,6 +83,10 @@ public class Calculator extends GridPane {
         final var formatterMemory = new TextFormatter<>(new FieldsStringConverter());
         formatterMemory.valueProperty().bind(valueMemory);
         fieldMemory.setTextFormatter(formatterMemory);
+
+        GridPane.setValignment(labelResult, VPos.CENTER);
+        GridPane.setHalignment(labelResult, HPos.CENTER);
+        labelResult.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.subtract(5).asString()));
 
         fieldResult.prefWidthProperty().bind(widthProperty().divide(5).multiply(3));
         fieldResult.setFont(font);
@@ -117,6 +122,7 @@ public class Calculator extends GridPane {
 
         add(labelMemory, 0, 0);
         add(fieldMemory, 1, 0, 4, 1);
+        add(labelResult, 0, 1);
         add(fieldResult, 1, 1, 4, 1);
         add(fieldOperation, 0, 2);
         add(fieldActual, 1, 2, 4, 1);
