@@ -11,6 +11,7 @@ Hello, my name is David and this is my first bigger project with Java and JavaFX
 * Use answer from previous operation
 * Float numbers
 # How to use
+1. To run enter the folder and type mvn javafx:run in your terminal or you can also make jar file with mvn package.
 1. First text field is the memory, second is the result and third is the current operation and current number.
 1. If no operation is set then current number is also the result.
 1. If you click on operation then current number becomes 0 and you can type in operand
