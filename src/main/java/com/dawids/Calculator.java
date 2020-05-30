@@ -107,10 +107,10 @@ public class Calculator extends GridPane {
             }
         });
 
-        add(fieldMemory, 0, 0, 2, 1);
-        add(fieldResult, 2, 0, 3, 1);
-        add(fieldOperation, 0, 1);
-        add(fieldActual, 1, 1, 4, 1);
+        add(fieldMemory, 1, 0, 4, 1);
+        add(fieldResult, 1, 1, 4, 1);
+        add(fieldOperation, 0, 2);
+        add(fieldActual, 1, 2, 4, 1);
     }
 
     private void createButtons() {
@@ -135,11 +135,11 @@ public class Calculator extends GridPane {
             if (operation == ButtonOperation.ALL_CLEAR) {
                 break;
             }
-            add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 3);
+            add(buttons.get(operation), operation.ordinal() % 5, operation.ordinal() / 5 + 4);
         }
-        add(buttons.get(ButtonOperation.CLEAR), 3, 2);
-        add(buttons.get(ButtonOperation.BACKSPACE), 0, 2);
-        add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 2);
+        add(buttons.get(ButtonOperation.CLEAR), 3, 3);
+        add(buttons.get(ButtonOperation.BACKSPACE), 0, 3);
+        add(buttons.get(ButtonOperation.ALL_CLEAR), 4, 3);
     }
 
     private void buttonAction(ActionEvent event) {
