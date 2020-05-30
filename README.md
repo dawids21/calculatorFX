@@ -16,6 +16,6 @@ Hello, my name is David and this is my first bigger project with Java and JavaFX
     * Press on equal sign or
     * Press on +, -, *, /, ^, %, then the current operation is performed and you can immediately start typing another one i.e. 6 + 6 * 9 = 108 (there is no order of operations implemented).
 1. Memory
-    1. M+ and M- add or subtract result number to/from memory number.
-    1. MS sets memory number as current number.
-    1. MC clears the memory
+    * M+ and M- add or subtract result number to/from memory number.
+    * MS sets memory number as current number.
+    * MC clears the memory
