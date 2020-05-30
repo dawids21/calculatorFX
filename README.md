@@ -1,5 +1,7 @@
 # About
 Hello, my name is David and this is my first bigger project with Java and JavaFX.
+
+![Calculator](calculatorFX.png)
 # Features
 * Basic operations like addition, subtraction or exponentiation.
 * Memory
