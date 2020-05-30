@@ -5,9 +5,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
@@ -59,11 +62,16 @@ public class Calculator extends GridPane {
         //Each filed is bound to window height and width so they are changing their size to fill all space
         final var font = Font.font(FONT_NAME);
         final var fontSize = new SimpleDoubleProperty(15);
+        final var labelMemory = new Label("Memory:");
         final var fieldMemory = new TextField();
         final var fieldResult = new TextField();
         final var fieldOperation = new TextField();
 
         fontSize.bind(Bindings.min(widthProperty().divide(20), heightProperty().divide(20)));
+
+        GridPane.setValignment(labelMemory, VPos.CENTER);
+        GridPane.setHalignment(labelMemory, HPos.CENTER);
+        labelMemory.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.subtract(5).asString()));
 
         fieldMemory.prefWidthProperty().bind(widthProperty().divide(5).multiply(2));
         fieldMemory.setFont(font);
@@ -107,6 +115,7 @@ public class Calculator extends GridPane {
             }
         });
 
+        add(labelMemory, 0, 0);
         add(fieldMemory, 1, 0, 4, 1);
         add(fieldResult, 1, 1, 4, 1);
         add(fieldOperation, 0, 2);
